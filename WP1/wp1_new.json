@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is first desgin for message",
+    "title": "Message_wp1",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Message",
+      "description": "Transfer messages between client and backend"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/message": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "get response message",
+        "description": "",
+        "operationId": "getResponse",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "description": "Message object that send by user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GetResponse"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "get response message",
+        "description": "",
+        "operationId": "postResponse",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Message object that send by user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GetResponse"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Message",
+          "CORS"
+        ],
+        "responses": {
+          "200": {
+            "description": "Give response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "default": 200
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "SendMessage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "photos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhotosType"
+          }
+        }
+      }
+    },
+    "PhotosType": {
+      "type": "object",
+      "properties": {
+        "objectKey": {
+          "type": "string"
+        },
+        "bucket": {
+          "type": "string"
+        },
+        "createdTimeStamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

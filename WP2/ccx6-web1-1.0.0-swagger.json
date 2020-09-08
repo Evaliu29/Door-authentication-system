@@ -1,0 +1,101 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a simple API for the visitor of the door-system",
+    "version" : "1.0.0",
+    "title" : "Door_system",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags" : [ {
+    "name" : "OTP",
+    "description" : "OTP mesages from visitor"
+  } ],
+  "paths" : {
+    "/OTP" : {
+      "post" : {
+        "tags" : [ "OTP" ],
+        "summary" : "Input the OTP",
+        "operationId" : "PostOPT",
+        "description" : "search the OPT of the visitor",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/SendMessage"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "schema" : {
+              "$ref" : "#/definitions/resMessage"
+            },
+            "description" : "Correct OTP"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+	  "options": {
+        "tags": [
+          "Message"
+        ],
+        "summary": "test connection",
+        "description": "",
+        "operationId": "optionsMessage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GetMessage"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  
+  "definitions" : {
+    "SendMessage" : {
+      "type" : "object",
+      "properties" : {
+        "OTP" : {
+          "type" : "string"
+        }
+      }
+    },
+    "resMessage" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer"
+        },
+        "body" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/ccx6/web1/1.0.0",
+  "schemes" : [ "https" ]
+}
